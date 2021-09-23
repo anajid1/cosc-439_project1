@@ -61,6 +61,7 @@ public class ana_TCPServer {
             String clientUsername = in.readLine();
 
             // Create a file to save client's messages.
+            // https://www.w3schools.com/java/java_files_create.asp
             FileWriter myWriter = new FileWriter("ana_chat.txt");
 
             // Receive and process the incoming messages.
@@ -84,8 +85,8 @@ public class ana_TCPServer {
             // Send a report back to client.
             out.println("Server received " + numMessages + " messages");
 
-
             // Read from file and send back client's messages.
+            // https://www.w3schools.com/java/java_files_read.asp
             File file = new File("ana_chat.txt");
             Scanner myReader = new Scanner(file);
             while (myReader.hasNextLine())
@@ -103,6 +104,7 @@ public class ana_TCPServer {
             out.println("DONE");
             myReader.close();
 
+            // https://www.w3schools.com/java/java_files_delete.asp
             file.delete();
 
         } catch (IOException e) {e.printStackTrace();}
