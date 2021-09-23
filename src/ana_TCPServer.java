@@ -1,10 +1,15 @@
-// Programmer: COSC 439/522, F '21
-// Server program
-// File name: "TCPServer.java"
-// When you run this program, you must give the service port
-// number as a command line argument. For example,
-// java TCPServer 22222
-
+/*
+ * Author: Dr. Tehranipour, Abdullah Najid
+ * Date: 09-23-2021
+ * COSC 439/522, F '21
+ * Server Program: Give server program a port number with argument -p otherwise server assumes a default port number.
+ * Server waits for a connection from a client program. When connection is established server notes the time and receives
+ * the client's username. After that the server keeps receiving messages from the client. The server prints the messages
+ * on the console and writes the messages to a file. After client sends message "DONE" the server sends the client:
+ * the number of messages it received, the message log of the client's messages via the chat file, and the
+ * connection time. Server then deletes the chat file and closes the connection and awaits for a new connection.
+ * Only 1 connection at a time is allowed.
+ */
 import java.io.*;
 import java.net.*;
 import java.util.Scanner;
