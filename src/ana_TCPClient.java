@@ -1,9 +1,15 @@
-// Programmer: COSC 439/522, F '21
-// Client program
-// File name: TCPClient.java
-// When you run this program, you must give both the host name and
-// the service port number as command line arguments. For example,
-// java TCPClient localhost 22222
+/*
+ * Author: Dr. Tehranipour, Abdullah Najid
+ * Date: 09-23-2021
+ * COSC 439/522, F '21
+ * Client Program: Program connects to a server program. Give the client a host address, port number, and username via
+ * command line arguments: -h, -p, and -u respectively; otherwise program will assume local host, port number 20750,
+ * and prompt the user for a username. Client establishes connection to the server and sends the server the username.
+ * Program then prompts user to enter messages to the server. "DONE" will end sending messages to the server.
+ * Then client programs reads various information from server until server sends "DONE". After that client closes the
+ * connection.
+ * Important: Server must be running before you attempt to run the client program.
+ */
 
 import java.io.*;
 import java.net.*;
