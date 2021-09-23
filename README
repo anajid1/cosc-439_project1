@@ -1,0 +1,31 @@
+Name: Abdullah Najid
+Email: anajid@emich.edu
+Date: 09-23-2021
+Class: COSC 439
+Professor: Dr. Tehranipour
+
+Project #1
+Description: This project modifies Dr. Tehranipour's existing program TCPServer.java and TCPClient.java. The project
+    creates a simple server-client relationship. The TCPServer gets started first and then TCPClient connects to the
+    server. The client sends messages to the server. The server then sends the client back the number of messages it
+    received, a log of the client's messages, and the duration of the connection.
+
+How to compile and run program: Simply compile ana_TCPClient.java and ana_TCPServer.java using javac in a terminal
+    or using the built in compiler in an IDE. Run the program using java and the respective class names that are
+    generated after compilation. It is important to run the server first and then the client. Make sure you give the
+    port number to the server program otherwise it assumes port number 20750 and similarly give the server's host
+    address and port number to the client program using command line arguments -h and -p otherwise it assumes the
+    server program is on the localhost at port 20750.
+
+*Conclusion*
+    Time: 5 hours
+    Difficulties: Figuring out how to send information from server to client (not a BIG difficulty just had to think
+        about it).
+    Bugs: No bugs that I know of. Client and server program should behave as expected as long as the user inputs are
+        valid (no error checking).
+    Credit:
+        1)
+            https://stackoverflow.com/a/20211695: Used this thread to understand how to get system time from java.
+        2)
+            https://www.w3schools.com/java/java_files.asp: I used the Java File Handling section from w3schools for
+                file IO in the Server program.
