@@ -17,6 +17,14 @@ import java.util.Scanner;
 public class ana_TCPServer {
     private static ServerSocket servSock;
 
+    // Values will be used to calculate connection time to a client.
+    private final static int MS_IN_HOUR = 3600000;
+    private final static int MS_IN_MINUTES = 60000;
+    private final static int MS_IN_SECONDS = 1000;
+
+    /* Gets a port number from args array, if no port number provided use default port number. Create the server
+     * object and keep running the run method which puts program in an endless state to look for a client connection.
+     */
     public static void main(String[] args) {
         System.out.println("Opening port...\n");
         try {
@@ -24,23 +32,34 @@ public class ana_TCPServer {
             int portNumber = 20750;
 
             // Check if any arguments were provided for a port number.
-            if (args.length == 2) {
-                if (args[0].equals("-p")) {
-                    portNumber = Integer.parseInt(args[1]);
+            for(int i = 0; i < args.length; i += 2) {
+                switch (args[i]) {
+                    case "-p":
+                        portNumber = Integer.parseInt(args[1]);
+                        break;
+                    default:
+                        System.out.println("Invalid Arguments! \nTerminating Program...");
+                        System.exit(1);
                 }
             }
-            // Create a server object
+
+
+            // Create a server object.
             servSock = new ServerSocket(portNumber);
         } catch (IOException e) {
             System.out.println("Unable to attach to port!");
             System.exit(1);
         }
 
+        // Keep trying to connect to a client
         do {
             run();
+            // Server connected to a client and now connection has ended.
+            // Run the run method again and wait for a client connection to establish again.
         } while (true);
     }
 
+    /* Method is used to make connection and end connection to a client. */
     private static void run() {
         Socket link = null;
         try {
@@ -99,11 +118,37 @@ public class ana_TCPServer {
 
             // Get connection time and send it to client.
             long endTime = System.currentTimeMillis();
-            long totalTimeMS = endTime-startTime;
-            long totalTimeSeconds = totalTimeMS/1000;
-            long totalTimeMinutes = totalTimeSeconds/60;
-            long totalTimeHours = totalTimeMinutes/60;
-            out.println(totalTimeHours + "::" + totalTimeMinutes + "::" + totalTimeSeconds + "::" + totalTimeMS);
+            // MS is added to name since unit of time is in milliseconds for better readability.
+            long timeMS = endTime-startTime;
+
+            /* Currently, timeMS holds total time. Eventually timeMS will only hold remaining time that can't fit into
+             * hours, minutes, and seconds.
+             */
+
+            int timeHours = 0;
+            int timeMinutes = 0;
+            int timeSeconds = 0;
+
+            // Get hours.
+            if(timeMS >= MS_IN_HOUR) {
+                timeHours = (int) timeMS/MS_IN_HOUR;
+                timeMS = timeMS % MS_IN_HOUR;
+            }
+
+            // Get minutes.
+            if(timeMS >= MS_IN_MINUTES) {
+                timeMinutes = (int) timeMS/MS_IN_MINUTES;
+                timeMS = timeMS % MS_IN_MINUTES;
+            }
+
+            // Get seconds.
+            if(timeMS >= MS_IN_SECONDS) {
+                timeSeconds = (int) timeMS/MS_IN_SECONDS;
+                timeMS = timeMS % MS_IN_SECONDS;
+            }
+
+            // Send time to client.
+            out.println(timeHours + "::" + timeMinutes + "::" + timeSeconds + "::" + timeMS);
 
             // Let client know there are no more messages from the server.
             out.println("DONE");
