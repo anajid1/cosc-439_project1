@@ -40,7 +40,7 @@ public class ana_TCPClient {
                     portNumber = args[i + 1];
                     break;
                 default:
-                    System.out.println("Invalid Arguments! \n Terminating Program...");
+                    System.out.println("Invalid Arguments! \nTerminating Program...");
                     System.exit(1);
             }
         }
