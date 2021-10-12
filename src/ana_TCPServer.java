@@ -99,6 +99,9 @@ public class ana_TCPServer {
                 // Put client's message in text file.
                 myWriter.write(formatMessage + "\n");
 
+                // Flush the formatted message into the text file instead of waiting till file is closed.
+                myWriter.flush();
+
                 numMessages++;
                 message = in.readLine();
             }
